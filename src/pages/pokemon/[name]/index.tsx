@@ -1,4 +1,3 @@
-"use client";
 import { GetServerSideProps } from "next";
 
 import React from "react";
@@ -38,7 +37,6 @@ export default function PokemonPage(props: { pokemonData: Pokemon[] }) {
   const { pokemonData } = props;
   const { name } = useRouter().query;
   const [{ name: pokemonName }] = pokemonData;
-  console.log("🚀 ~ PokemonPage ~ pokemon:", pokemonData);
   return (
     <>
       <Head>

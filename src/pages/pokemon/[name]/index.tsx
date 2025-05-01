@@ -7,12 +7,7 @@ import { pokeApi } from "@/constant/env";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
-
-interface PokemonCardProps {
-  id: number;
-  name: string;
-  image: string;
-}
+import { Pokemon, PokemonCardProps } from "..";
 
 function PokemonCard({ id, name, image }: PokemonCardProps) {
   return (
@@ -31,15 +26,15 @@ function PokemonCard({ id, name, image }: PokemonCardProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { name } = context.query;
   const res = await fetch(`${pokeApi}/${name}`);
-  const data = (await res.json()) as any;
+  const data = await res.json();
 
   return { props: { pokemonData: data.forms } };
 };
 
-export default function PokemonPage(props: { pokemonData: any }) {
+export default function PokemonPage(props: { pokemonData: Pokemon[] }) {
   const { pokemonData } = props;
   const { name } = useRouter().query;
   const [{ name: pokemonName }] = pokemonData;

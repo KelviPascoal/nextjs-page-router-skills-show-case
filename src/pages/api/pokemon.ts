@@ -32,9 +32,7 @@ export default async function handler(
 
     const data: PokeApiResponse = await response.json();
     return res.status(200).json(data);
-  } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: error.message || "Internal server error" });
+  } catch {
+    return res.status(500).json({ message: "Internal server error" });
   }
 }

@@ -8,11 +8,22 @@ import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 
-interface PokemonCardProps {
-  id: number;
+export interface PokemonCardProps {
+  id: string;
   name: string;
   image: string;
 }
+
+export type Pokemon = {
+  name: string;
+  url: string;
+};
+export type PokemonListResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Pokemon[];
+};
 
 function PokemonCard({ name, image }: PokemonCardProps) {
   return (
@@ -29,13 +40,13 @@ function PokemonCard({ name, image }: PokemonCardProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<any> = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(`${pokeApi}?limit=9`);
-  const data = (await res.json()) as any;
+  const data = (await res.json()) as PokemonListResponse;
   return { props: { results: data.results } };
 };
 
-export default function PokemonsPage(props: { results: any[] }) {
+export default function PokemonsPage(props: { results: Pokemon[] }) {
   const { results } = props;
   return (
     <>

@@ -6,6 +6,7 @@ import styles from "../PokemonCard.module.css";
 import { pokeApi } from "@/constant/env";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 
 interface PokemonCardProps {
   id: number;
@@ -16,7 +17,13 @@ interface PokemonCardProps {
 function PokemonCard({ id, name, image }: PokemonCardProps) {
   return (
     <div className={styles.card}>
-      <img src={image} alt={name} className={styles.image} />
+      <Image
+        src={image}
+        alt={name}
+        className={styles.image}
+        width={120}
+        height={120}
+      />
       <h2 className={styles.name}>
         {id}. {name}
       </h2>

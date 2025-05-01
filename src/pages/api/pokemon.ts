@@ -31,7 +31,6 @@ export default async function handler(
     }
 
     const data: PokeApiResponse = await response.json();
-    console.log("🚀 ~ data:", data);
     return res.status(200).json(data);
   } catch (error: any) {
     return res
